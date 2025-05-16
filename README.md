@@ -5,7 +5,7 @@ SDK for wotk with Telegram SMS API.
 ## Install
 
 ```bash
-go get github.com/yaufdd/telegram-sms-sdk
+go get github.com/yaufdd/telegram-sms-sdk@latest
 ```
 
 ## How to use
