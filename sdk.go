@@ -70,9 +70,10 @@ func (c *Client) RegisterBot(telegramID int64, token string) (RegisterBotRespons
 
 type (
 	SendMessageRequest struct {
-		UUID    string `json:"uuid"`
-		Hash    string `json:"hash"`
-		Message string `json:"message"`
+		UUID         string `json:"uuid" binding:"required"`
+		Hash         string `json:"hash" binding:"required"`
+		ReceiverTgID int64  `json:"receiver_tg_id" binding:"required"`
+		Text         string `json:"text" binding:"required"`
 	}
 
 	SendMessageResponse struct {
@@ -80,11 +81,12 @@ type (
 	}
 )
 
-func (c *Client) SendMessage(uuid string, hash string, receiverTgID int64, text string) (SendMessageResponse, error) {
+func (c *Client) SendMessage(uuidStr, hash string, receiverTgID int64, text string) (SendMessageResponse, error) {
 	req := SendMessageRequest{
-		UUID:    uuid,
-		Hash:    hash,
-		Message: text,
+		UUID:         uuidStr,
+		Hash:         hash,
+		ReceiverTgID: receiverTgID,
+		Text:         text,
 	}
 
 	jsonData, err := json.Marshal(req)
